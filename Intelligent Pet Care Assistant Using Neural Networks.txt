@@ -1,0 +1,84 @@
+
+
+import tensorflow as tf
+from tensorflow.keras import layers, models
+import numpy as np
+training_texts = [
+    "my pet is barking continuously",
+    "my dog is restless and making noise",
+    "cat is crying and begging",
+    "dog looks tired and looking at food",
+    "pet is calm and playing",
+    "pet is sleeping peacefully",
+    "dog finished food and relaxing",
+    "cat is active and clean"
+]
+
+training_labels = np.array([1, 1, 1, 1, 0, 0, 0, 0])
+
+tokenizer = tf.keras.preprocessing.text.Tokenizer()
+tokenizer.fit_on_texts(training_texts)
+train_seq = tokenizer.texts_to_sequences(training_texts)
+train_seq = tf.keras.preprocessing.sequence.pad_sequences(train_seq, maxlen=10)
+model = models.Sequential([
+    layers.Embedding(input_dim=len(tokenizer.word_index) + 1, output_dim=16, input_length=10),
+    layers.Flatten(),
+    layers.Dense(32, activation="relu"),
+    layers.Dense(16, activation="relu"),
+    layers.Dense(1, activation="sigmoid")
+])
+
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+model.fit(train_seq, training_labels, epochs=10, verbose=0)
+print("\n===== PET BEHAVIOR ANALYZER =====")
+user_text = input("Describe your pet's behavior: ")
+
+seq = tokenizer.texts_to_sequences([user_text])
+seq = tf.keras.preprocessing.sequence.pad_sequences(seq, maxlen=10)
+prediction = model.predict(seq, verbose=0)[0][0]
+print("\n===== RESULT =====")
+
+if prediction > 0.6:
+    print(" Your pet MIGHT BE HUNGRY.")
+    print(" Recommended Food Options:")
+    print("   - Soft cooked rice with a little boiled chicken")
+    print("   - Dog-friendly dry kibble")
+    print("   - Homemade curd rice (for mild stomach comfort)")
+
+    print("\n Mood Improvement Tips:")
+    print("   - Speak softly and stay near the pet")
+    print("   - Give small snacks first, then the meal")
+    print("   - Don’t force-feed, keep food reachable")
+
+    print("\n Reason:")
+    print("   - Pets show hunger by begging, crying, and following you.")
+
+
+elif prediction < 0.4:
+    print(" Your pet seems NORMAL / NOT HUNGRY.")
+    print(" Mood Improvement Tips:")
+    print("   - Give toys to play")
+    print("   - Take for a short walk")
+    print("   - Light petting behind the ears improves their mood")
+
+    print("\n Food Suggestion (Only if needed later):")
+    print("   - Light dry food")
+    print("   - Warm water bowl available always")
+
+    print("\n Reason:")
+    print("   - Active, calm, sleeping behavior = not hungry.")
+
+
+else:
+    print(" Your pet’s behavior is UNCLEAR.")
+    print(" Possible Reasons:")
+    print("   - Confusion, mild stress, wanting attention")
+
+    print("\n Mood Improvement Tips:")
+    print("   - Sit beside your pet for 2–3 minutes")
+    print("   - Give favorite toy or chew stick")
+    print("   - Try calling their name softly")
+
+    print("\n Optional Food:")
+    print("   - Little milk + biscuits (pet safe)")
+    print("   - Small treat bite")
