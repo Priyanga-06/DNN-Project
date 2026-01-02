@@ -1,6 +1,7 @@
 # DNN-Project
 
 Smart Pet Mood & Needs Prediction System (DNN)
+
 📌 Project Overview
 
 This project is an AI-based Smart Pet Care System that uses a Deep Neural Network (DNN) to analyze pet behavior described in text form and predict whether the pet is hungry, not hungry, or confused.
