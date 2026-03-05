@@ -1,15 +1,15 @@
 # DNN-Project
 
-Smart Pet Mood & Needs Prediction System (DNN)
+## Smart Pet Mood & Needs Prediction System (DNN)
 
-📌 Project Overview
+# 📌 Project Overview
 
 This project is an AI-based Smart Pet Care System that uses a Deep Neural Network (DNN) to analyze pet behavior described in text form and predict whether the pet is hungry, not hungry, or confused.
 Based on the prediction, the system also provides food recommendations, mood improvement tips, and reasons for the pet’s behavior.
 
 This project is designed as a simple but intelligent mini-project, suitable for resumes and academic submissions.
 
-🎯 Problem Statement
+# 🎯 Problem Statement
 
 Pet owners often struggle to understand what their pet needs based on its behavior.
 This project helps by:
@@ -20,7 +20,7 @@ Predicting hunger or mood state
 
 Suggesting suitable food and care tips
 
-💡 Solution Approach
+#  Solution Approach
 
 Convert pet behavior text into numerical format using a tokenizer
 
@@ -30,7 +30,7 @@ Predict the pet’s current need
 
 Provide human-understandable recommendations
 
-🧠 Technology Used
+# Technology Used
 
 Python
 
@@ -62,7 +62,7 @@ my dog is barking and running to the kitchen
 
 📤 Output
 
-The system predicts:
+# The system predicts:
 
 🐾 Pet hunger status (Hungry / Not Hungry / Unclear)
 
